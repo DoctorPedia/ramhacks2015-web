@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Destiny</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="findDoctor.js"></script>
+
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+		<style>
+			html, body
+			{
+				background-color: rgb(40, 96, 144);
+
+				overflow-x: hidden; 
+    			overflow-y: hidden;
+
+    			color: white;
+			}
+		</style>
+
+		<script>
+			function getParameterByName(name)
+			{
+			    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+			    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+			        results = regex.exec(location.search);
+			    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+			}
+
+			var doctorID = getParameterByName('doctorID');
+			var planID = getParameterByName('planID');
+
+			$(document).ready(function()
+			{
+				
+			});
+		</script>
+
+	</head>
+ 
+	<body>
+		<div id="map">
+			
+		</div>
+	</body>	
+</html> 

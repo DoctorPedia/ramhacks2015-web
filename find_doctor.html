@@ -125,7 +125,8 @@
 
 			function HandleSelectionCompletion()
 			{
-				alert("DoctorID: " + doctorID + ", ProviderID: " + providerID + ", PlanID: " + planID);
+				//alert("DoctorID: " + doctorID + ", ProviderID: " + providerID + ", PlanID: " + planID);
+				window.location.replace("display_doctors.html?doctorID=" + doctorID + "&planID=" + planID);
 			}
 
 		</script>
