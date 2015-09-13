@@ -50,6 +50,13 @@ function populateMap () {
 		    position: doctorLocs[i].loc,
 		    title: doctorLocs[i].practice
 		  });
+		var infoContent = 
+			"<div>"+
+				"<h1>"+doctorLocs[i].practice+"</h1>"+
+				"<h2>"+doctorLocs[i].profile.last_name + ", " + doctorLocs[i].profile.first_name + "</h2>"+
+				"<img src='"+doctorLocs[i].profile.image_url+"' height=20px widith=20px />" +
+
+			"</div>";
 		map.panTo(loc);
 	}
 }
