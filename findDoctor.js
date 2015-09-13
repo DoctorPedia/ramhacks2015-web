@@ -52,7 +52,7 @@ function parseDoctors(doctors) {
 				},
 				specs: doctors[i].specialties,
 				practice: doctors[i].practices[0].name,
-				//rating: doctors[i].ratings[0].rating,
+				rating: doctors[i].ratings[0].rating,
 				profile: doctors[i].profile //first_name, middle_name, last_name, title, image_url, gender, bio
 			});			
 		}
@@ -89,6 +89,7 @@ function attachInfo(marker, doctor){
 			+ "<img src='"+doctor.profile.image_url+"' height=45px widith=45px /></div>" +
 			"<h2>"+doctor.profile.last_name + ", " + doctor.profile.first_name + "</h2>"+
 			"<h3>"+specString+"</h3>"+
+			'<span class="stars">' + doctor.rating +'</span>'+
 		"</div>";
 	var infowindow = new google.maps.InfoWindow({
 	  content: infoContent

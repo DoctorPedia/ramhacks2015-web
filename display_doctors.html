@@ -19,6 +19,16 @@
       #map {
         height: 100%;
       }
+      span.stars, span.stars span {
+		    display: block;
+		    background: url(stars.png) 0 -16px repeat-x;
+		    width: 80px;
+		    height: 16px;
+		}
+
+		span.stars span {
+		    background-position: 0 0;
+		}
     </style>				
 
 		<script>
@@ -37,6 +47,18 @@
 			{
 				findDoctors("20", "20", planID, doctorID);
 			});
+			$.fn.stars = function() {
+			    return $(this).each(function() {
+			        // Get the value
+			        var val = parseFloat($(this).html());
+			        // Make sure that the value is in 0 - 5 range, multiply to get width
+			        var size = Math.max(0, (Math.min(5, val))) * 16;
+			        // Create stars holder
+			        var $span = $('<span />').width(size);
+			        // Replace the numerical value with stars
+			        $(this).html($span);
+			    });
+			}
 		</script>
 
 	</head>
