@@ -9,6 +9,7 @@ function findDoctors(range, limit, insureID, specID) {
 
 	var baseURL = 'https://api.betterdoctor.com/2015-01-27/doctors';
 	var request = {
+		type: 'GET',
 		url: 'https://api.betterdoctor.com/2015-01-27/doctors',
 		data: {
 			location: loc.lat + "," + loc.lng + "," + range,
@@ -21,7 +22,7 @@ function findDoctors(range, limit, insureID, specID) {
 		request['insurance_uid'] = insureID;
 	if(specID.length > 0)
 		request['specialty_uid'] = specID;
-	$.get(request).done(function (res) {
+	$.ajax(request).done(function (res) {
 		parseDoctors(res.data);
 		populateMap();
 	});
