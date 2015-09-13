@@ -27,7 +27,7 @@
 			    margin-top: 25%;
 			}
 
-			.doctors
+			.entry_container
 			{
 				margin-left: 15%;
 				margin-top: 5%;
@@ -37,7 +37,7 @@
 				overflow: auto;
 			}
 
-			.doctor_entry
+			.entry
 			{
 				width: 100%; margin-top: 5px;
 			}
@@ -45,20 +45,47 @@
 
 		<script>
 
-		$(document).ready(function() { 
-			for(var i = 0; i < 10; i++) AddDoctor(i, "Medical Doctor");
-		});
-			
+			var doctorID = -1;
+			var providerID = -1;
+
+			$(document).ready(function() { 
+				for(var i = 0; i < 25; i++) AddDoctor(i, "Medical Doctor");
+			});	
 
 			function AddDoctor(id, name)
 			{
 				var btn = document.createElement("button");
+				btn.setAttribute("class", "btn btn-primary entry");
 
-				btn.setAttribute("class", "btn btn-primary doctor_entry");
-				btn.onclick = function() { location.href='CHANGE_ME'; };
+				btn.onclick = function() { 
+					doctorID = id;
+					document.getElementById("entries").innerHTML = "";
+
+					for(var i = 0; i < 25; i++) AddInsurer(i, "Really Cool Provider");
+				};
+
 				btn.innerHTML = name;
+				document.getElementById("entries").appendChild(btn);
+			}
 
-				document.getElementById("doctors").appendChild(btn);
+			function AddInsurer(id, name)
+			{
+				var btn = document.createElement("button");
+				btn.setAttribute("class", "btn btn-primary entry");
+
+				btn.onclick = function() { 
+					providerID = id; 
+					document.getElementById("entries").style.visibility = "hidden";
+					HandleSelectionCompletion();
+				};
+
+				btn.innerHTML = name;
+				document.getElementById("entries").appendChild(btn);
+			}
+
+			function HandleSelectionCompletion()
+			{
+				alert("DoctorID: " + doctorID + ", ProviderID: " + providerID);
 			}
 
 		</script>
@@ -67,7 +94,7 @@
  
 	<body>
 
-		<div id="doctors" class="doctors">
+		<div id="entries" class="entry_container">
 
 		</div>
 
