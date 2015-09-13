@@ -11,16 +11,15 @@
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 		<style>
-			html, body
-			{
-				background-color: rgb(40, 96, 144);
-
-				overflow-x: hidden; 
-    			overflow-y: hidden;
-
-    			color: white;
-			}
-		</style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>				
 
 		<script>
 			function getParameterByName(name)
@@ -36,7 +35,7 @@
 
 			$(document).ready(function()
 			{
-				
+				findDoctors("20", "20", planID, doctorID);
 			});
 		</script>
 
@@ -45,6 +44,7 @@
 	<body>
 		<div id="map">
 			
-		</div>
+		</div><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0Qofoi1iDmxBLbUfr_4ETdevbCIJJuKM&callback=initMap"
+        async defer></script>
 	</body>	
 </html> 
