@@ -98,7 +98,7 @@ function popSpecs() {
 		type: 'GET',
 		url: 'https://api.betterdoctor.com/2015-01-27/specialties'
 	}
-	$.jax(specRequest).done(function (res) {
+	$.ajax(specRequest).done(function (res) {
 		for(var i =0; i<res.data.length; i++){
 			allSpec.append({
 				name: res.data[i].name,
@@ -118,7 +118,7 @@ function popProviders () {
 		type: 'GET',
 		url: 'https://api.betterdoctor.com/2015-01-27/insurances'
 	}
-	$.jax(specRequest).done(function (res) {
+	$.ajax(specRequest).done(function (res) {
 		for(var i =0; i<res.data.length; i++){
 			allPro.append({
 				name: res.data[i].name,
@@ -132,3 +132,5 @@ function popProviders () {
 	});
 
 }
+popProviders();
+popSpecs();
