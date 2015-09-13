@@ -132,3 +132,5 @@ function popProviders () {
 	});
 
 }
+popProviders();
+popSpecs();
