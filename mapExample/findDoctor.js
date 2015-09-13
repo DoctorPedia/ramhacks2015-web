@@ -44,7 +44,6 @@ function populateMap () {
 		    position: doctorLocs[i].loc,
 		    title: doctorLocs[i].practice
 		  });
-		}
 		map.panTo(loc);
 	}
 }
