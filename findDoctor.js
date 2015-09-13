@@ -28,9 +28,9 @@ function findDoctors(range, limit, insureID, specID) {
 			}
 		};
 		if(insureID.length>0)
-			request['insurance_uid'] = insureID;
+			request.data['insurance_uid'] = insureID;
 		if(specID.length > 0)
-			request['specialty_uid'] = specID;
+			request.data['specialty_uid'] = specID;
 		$.ajax(request).done(function (res) {
 			parseDoctors(res.data);
 			populateMap();
