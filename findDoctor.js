@@ -62,6 +62,18 @@ function parseDoctors(doctors) {
 			doctorLocs.push(tempObj);			
 		}
 	}
+	doctorLocs.sort(function(a,b){
+		var an = a.profile.last_name + "," + a.profile.last_name,
+			bn = b.profile.last_name + "," + b.profile.last_name;
+
+		if(an > bn) {
+			return 1;
+		}
+		if(an < bn) {
+			return -1;
+		}
+		return 0;
+	});
 }
 function populateMap () {
 	for(var i = 0; i<doctorLocs.length; i++){
