@@ -14,7 +14,7 @@
 			html, body
 			{
 				background-color: rgb(40, 96, 144);
-				height: 95%;
+				height: 100%;
 
 				overflow-x: hidden; 
     			overflow-y: hidden;
@@ -37,14 +37,17 @@
 				margin-left: 15%;
 				margin-top: 5%;
 				width: 70%;
-				height: 90%;
-				max-height: 90%;
+				height: 100%;
+				max-height: 87%;
 				overflow: auto;
+				overflow-x: hidden; 
 			}
-
 			.entry
 			{
 				width: 100%; margin-top: 5px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
 			}
 		</style>
 
@@ -116,7 +119,6 @@
 						AddPlan(provider.plans[i].uid, provider.plans[i].name);
 				};
 
-				console.log(provider);
 				btn.innerHTML = provider.name;
 				document.getElementById("insurers").appendChild(btn);
 			}
