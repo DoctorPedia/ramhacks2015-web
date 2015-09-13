@@ -7,7 +7,7 @@ var loc = {lat: 0, lng: 0};
 // }
 var doctorLocs = [];
 function findDoctors(range, limit, insureID, specID) {
-	specID = "";
+	//specID = "";
 	navigator.geolocation.getCurrentPosition(function(location){
 		loc['lat'] = location.coords.latitude;
     	loc['lng'] =location.coords.longitude;
