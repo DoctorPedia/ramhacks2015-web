@@ -29,15 +29,18 @@ function findDoctors(range, limit, insureID, specID) {
 }
 function parseDoctors(doctors) {
 	for(var i =0; i<doctors.length;i++){
-		doctorLocs.push({
-			loc: {
-				lat: doctors[i].practices[0].lat,
-				lng: doctors[i].practices[0].lon
-			},
-			practice: doctors[i].practices[0].name,
-			rating: doctors[i].ratings[0].rating,
-			profile: doctors[i].profile //first_name, middle_name, last_name, title, image_url, gender, bio
-		});
+		var practices = doctors[i].practices;
+		for(var j = 0; j<practices.length; j++){
+			doctorLocs.push({
+				loc: {
+					lat: practices[j].lat,
+					lng: practices[j].lon
+				},
+				practice: doctors[i].practices[0].name,
+				rating: doctors[i].ratings[0].rating,
+				profile: doctors[i].profile //first_name, middle_name, last_name, title, image_url, gender, bio
+			});			
+		}
 	}
 }
 function populateMap () {
