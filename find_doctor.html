@@ -10,9 +10,10 @@
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 		<style>
-			body
+			html,body
 			{
 				background-color: rgb(40, 96, 144);
+				height: 95%
 			}
 
 			.logo
@@ -25,15 +26,50 @@
 			    margin-left: 25%;
 			    margin-top: 25%;
 			}
+
+			.doctors
+			{
+				margin-left: 15%;
+				margin-top: 5%;
+				width: 70%;
+				height: 90%;
+				max-height: 90%;
+				overflow: auto;
+			}
+
+			.doctor_entry
+			{
+				width: 100%; margin-top: 5px;
+			}
 		</style>
+
+		<script>
+
+		$(document).ready(function() { 
+			for(var i = 0; i < 10; i++) AddDoctor(i, "Medical Doctor");
+		});
+			
+
+			function AddDoctor(id, name)
+			{
+				var btn = document.createElement("button");
+
+				btn.setAttribute("class", "btn btn-primary doctor_entry");
+				btn.setAttribute("class", "btn btn-primary doctor_entry");
+				btn.onclick = function() { location.href='CHANGE_ME'; };
+				btn.innerHTML = name;
+
+				document.getElementById("doctors").appendChild(btn);
+			}
+
+		</script>
+
 	</head>
 
 	<body>
 
-		<div class="panel panel-default">
-			<div class="panel-body">
-				Basic panel example
-			</div>
+		<div id="doctors" class="doctors">
+
 		</div>
 
 	</body>	
