@@ -10,10 +10,12 @@ function findDoctors(range, limit, insureID, specID) {
 	var baseURL = 'https://api.betterdoctor.com/2015-01-27/doctors';
 	var request = {
 		url: baseURL,
-		location: loc.lat + "," + loc.lng + "," + range,
-		user_location: loc.lat + "," + loc.lng,
-		limit: limit,
-		user_key: "02d43d2040b26fd640f5963e44054d2f"
+		data: {
+			location: loc.lat + "," + loc.lng + "," + range,
+			user_location: loc.lat + "," + loc.lng,
+			limit: limit,
+			user_key: "02d43d2040b26fd640f5963e44054d2f"
+		}
 	};
 	if(insureID.length>0)
 		request['insurance_uid'] = insureID;
