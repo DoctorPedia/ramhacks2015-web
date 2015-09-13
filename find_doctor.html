@@ -17,8 +17,9 @@
 
 				overflow-x: hidden; 
     			overflow-y: hidden;
-			}
 
+    			color: white;
+			}
 			.logo
 			{
 			    box-shadow: 0px 0px 0px 25px rgba(255, 255, 255, 1);
@@ -77,6 +78,8 @@
 				btn.onclick = function() { 
 					doctorID = id;
 					document.getElementById("doctors").remove();
+
+					document.getElementById("header").innerHTML = "<h2>Select your insurer!</h2>";
 					document.getElementById("insurers").style.visibility = "visible" ;
 				};
 
@@ -92,6 +95,8 @@
 				btn.onclick = function() { 
 					providerID = id; 
 					document.getElementById("insurers").remove();
+
+					document.getElementById("header").innerHTML = "<h2>Select your plan!</h2>";
 					document.getElementById("plans").style.visibility = "visible" ;
 				};
 
@@ -107,6 +112,7 @@
 				btn.onclick = function() { 
 					planID = id; 
 					document.getElementById("plans").remove();
+					document.getElementById("header").innerHTML = "<h2>Thanks!<br><br>Give us a moment</h2>";
 
 					HandleSelectionCompletion();
 				};
@@ -125,9 +131,10 @@
 	</head>
  
 	<body>
+		<center><div id="header"> <h2>Select a doctor!</h2> </div></center>
 
 		<div id="doctors" class="entry_container">
-
+			
 		</div>
 
 		<div id="insurers" class="entry_container" style="visibility: hidden">
