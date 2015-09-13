@@ -78,18 +78,31 @@
 
         var map, heatmap;
         var latitude, longitude;
-        navigator.geolocation.getCurrentPosition(GetLocation);
+        var diseasePoints;
+        //navigator.geolocation.getCurrentPosition(GetLocation);
         function GetLocation(location) {
-            latitude = location.coords.latitude;
-            longitude = location.coords.longitude;
+            //latitude = location.coords.latitude;
+            //longitude = location.coords.longitude;
+
+            
+
+
         }
 
         function initMap(points) {
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 13,
-                center: { lat: latitude, lng: longitude },
-                //center: { lat: 37.5333, lng: -77.4667 },
+                //center: { lat: latitude, lng: longitude },
+                center: { lat: 37.5333, lng: -77.4667 },
                 mapTypeId: google.maps.MapTypeId.MAP
+            });
+
+            $.ajax({
+                method: "GET",
+                url: "http://104.236.202.230:443/"
+            }).done(function (getPoints) {
+                //diseasePoints=JSON.parse(getPoints);
+                diseasePoints = getPoints;
             });
 
         }
@@ -145,8 +158,15 @@
 
             $("#onStrep").hide();
             $("#offStrep").show();
+            var strepPoints=[];
 
+            for (var i = 0; i < diseasePoints.strep.length; i++){
+                strepPoints.push(new google.maps.LatLng(diseasePoints.strep[i][0], diseasePoints.strep[i][1]));
+            }
+
+            /*
             var strepPoints = [
+
               new google.maps.LatLng(37.545679, -77.451128),
               new google.maps.LatLng(37.545662, -77.451240),
               new google.maps.LatLng(37.545611, -77.451036),
@@ -163,7 +183,7 @@
               new google.maps.LatLng(37.541369, -77.428968),
               new google.maps.LatLng(37.541437, -77.431242),
               new google.maps.LatLng(37.542946, -77.428909)
-            ];
+            ]; */
 
             heatmapStrep = new google.maps.visualization.HeatmapLayer({
                 data: strepPoints,
@@ -175,6 +195,12 @@
 
             $("#onFlu").hide();
             $("#offFlu").show();
+
+            var fluPoints = [];
+
+            for (var i = 0; i < diseasePoints.flu.length; i++) {
+                fluPoints.push(new google.maps.LatLng(diseasePoints.flu[i][0], diseasePoints.flu[i][1]));
+            }
 
             var fluPoints = [
               new google.maps.LatLng(37.539981, -77.429837),
@@ -197,6 +223,13 @@
             $("#onCold").hide();
             $("#offCold").show();
 
+            var coldPoints = [];
+
+            for (var i = 0; i < diseasePoints.cold.length; i++) {
+                coldPoints.push(new google.maps.LatLng(diseasePoints.cold[i][0], diseasePoints.cold[i][1]));
+            }
+
+            /*
             var coldPoints = [
               new google.maps.LatLng(37.549586, -77.450520),
               new google.maps.LatLng(37.548457, -77.453481),
@@ -213,6 +246,7 @@
               new google.maps.LatLng(37.548480, -77.458241),
               new google.maps.LatLng(37.549901, -77.455811) 
             ];
+            */
 
             heatmapCold = new google.maps.visualization.HeatmapLayer({
                 data: coldPoints,
