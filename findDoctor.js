@@ -72,7 +72,7 @@ function populateMap () {
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: loc,
-    zoom: 8
+    zoom: 5
   });
 }
 function attachInfo(marker, doctor){
