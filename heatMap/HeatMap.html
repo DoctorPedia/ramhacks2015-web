@@ -77,13 +77,18 @@
     <script>
 
         var map, heatmap;
-        //navigator.geolocation.getCurrentPosition(GetLocation);
+        var latitude, longitude;
+        navigator.geolocation.getCurrentPosition(GetLocation);
+        function GetLocation(location) {
+            latitude = location.coords.latitude;
+            longitude = location.coords.longitude;
+        }
 
         function initMap(points) {
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 13,
-                //center: { lat: location.coords.latitude, lng: location.coords.longitude },
-                center: { lat: 37.5333, lng: -77.4667 },
+                center: { lat: latitude, lng: longitude },
+                //center: { lat: 37.5333, lng: -77.4667 },
                 mapTypeId: google.maps.MapTypeId.MAP
             });
 
