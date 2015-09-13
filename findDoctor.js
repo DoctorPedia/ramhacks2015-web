@@ -72,6 +72,7 @@ function populateMap () {
 		attachInfo(marker, doctorLocs[i]);
 	}
 	map.panTo(loc);
+	$('span.stars').stars();
 }
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
