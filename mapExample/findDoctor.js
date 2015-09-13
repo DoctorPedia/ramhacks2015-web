@@ -50,25 +50,28 @@ function populateMap () {
 		    position: doctorLocs[i].loc,
 		    title: doctorLocs[i].practice
 		  });
-		var infoContent = "";
-			
-			var infowindow = new google.maps.InfoWindow({
-			  content: "<div>"+
-				"<h1>"+doctorLocs[i].practice+"</h1>"+
-				"<h2>"+doctorLocs[i].profile.last_name + ", " + doctorLocs[i].profile.first_name + "</h2>"+
-				"<img src='"+doctorLocs[i].profile.image_url+"' height=20px widith=20px />" +
-
-			"</div>";
-			});
-			marker.addListener('click', function() {
-			  infowindow.open(map, marker);
-			});
-		map.panTo(loc);
+		attachInfo(marker, doctorLocs);
 	}
+	map.panTo(loc);
 }
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: loc,
     zoom: 8
   });
+}
+function attachInfo(marker, doctorLocs){
+	var infoContent = 
+		"<div>"+
+			"<h1>"+doctorLocs[i].practice+"</h1>"+
+			"<h2>"+doctorLocs[i].profile.last_name + ", " + doctorLocs[i].profile.first_name + "</h2>"+
+			"<img src='"+doctorLocs[i].profile.image_url+"' height=20px widith=20px />" +
+
+		"</div>";
+	var infowindow = new google.maps.InfoWindow({
+	  content: infoContent
+	});
+	marker.addListener('click', function() {
+	  infowindow.open(map, marker);
+	});
 }
