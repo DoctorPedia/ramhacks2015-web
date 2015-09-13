@@ -36,6 +36,7 @@ function parseDoctors(doctors) {
 					lat: practices[j].lat,
 					lng: practices[j].lon
 				},
+				specs: doctors[i].specialties,
 				practice: doctors[i].practices[0].name,
 				rating: doctors[i].ratings[0].rating,
 				profile: doctors[i].profile //first_name, middle_name, last_name, title, image_url, gender, bio
@@ -50,7 +51,7 @@ function populateMap () {
 		    position: doctorLocs[i].loc,
 		    title: doctorLocs[i].practice
 		  });
-		attachInfo(marker, doctorLocs);
+		attachInfo(marker, doctorLocs[i]);
 	}
 	map.panTo(loc);
 }
@@ -60,13 +61,20 @@ function initMap() {
     zoom: 8
   });
 }
-function attachInfo(marker, doctorLocs){
-	var infoContent = 
-		"<div>"+
-			"<h1>"+doctorLocs[i].practice+"</h1>"+
-			"<h2>"+doctorLocs[i].profile.last_name + ", " + doctorLocs[i].profile.first_name + "</h2>"+
-			"<img src='"+doctorLocs[i].profile.image_url+"' height=20px widith=20px />" +
+function attachInfo(marker, doctor){
+	var specString = "";
+	for(var k = 0; k<doctor.specs.length; k++){
+		if(k==(doctor.specs.length -1))
+			specString += " " + doctor.specs[k].name;
+		else
+			specString += " " + doctor.specs[k].name + ",";
 
+	}
+	var infoContent = 
+		"<div>"+ "<h1>"+doctor.practice+"</h1><hr>"+ '<div class="pull-left" style="width: 50%; max-width: 46px; float:left">'
+			+ "<img src='"+doctor.profile.image_url+"' height=45px widith=45px /></div>" +
+			"<h2>"+doctor.profile.last_name + ", " + doctor.profile.first_name + "</h2>"+
+			"<h3>"+specString+"</h3>"+
 		"</div>";
 	var infowindow = new google.maps.InfoWindow({
 	  content: infoContent
@@ -74,4 +82,18 @@ function attachInfo(marker, doctorLocs){
 	marker.addListener('click', function() {
 	  infowindow.open(map, marker);
 	});
+// 	var infoContent = 
+// 		"<div>"+
+// 			"<h1>"+doctorLocs[i].practice+"</h1>"+
+// 			"<h2>"+doctorLocs[i].profile.last_name + ", " + doctorLocs[i].profile.first_name + "</h2>"+
+// 			"<img src='"+doctorLocs[i].profile.image_url+"' height=20px widith=20px />" +
+
+// 		"</div>";
+// 	var infowindow = new google.maps.InfoWindow({
+// 	  content: infoContent
+// 	});
+// 	marker.addListener('click', function() {
+// 	  infowindow.open(map, marker);
+// 	});
+// }
 }
