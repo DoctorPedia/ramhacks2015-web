@@ -1,5 +1,5 @@
 var map;
-var loc = {lat: 37.5466, lng: 77.4533};
+var loc = {lat: 37.5466, lng: -77.4533};
 var doctorLocs = [];
 function findDoctors(range, limit, insureID, specID) {
 	if(!(limit.length > 0))
