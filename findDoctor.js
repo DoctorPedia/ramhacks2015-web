@@ -1,5 +1,10 @@
 var map;
-var loc = {lat: 37.5466, lng: -77.4533};
+var loc = {lat: 0, lng: 0};
+navigator.geolocation.getCurrentPosition(GetLocation);
+function GetLocation(location) {
+    loc['lat'] = location.coords.latitude;
+    loc['lng'] =location.coords.longitude;
+}
 var doctorLocs = [];
 function findDoctors(range, limit, insureID, specID) {
 	if(!(limit.length > 0))
@@ -82,18 +87,48 @@ function attachInfo(marker, doctor){
 	marker.addListener('click', function() {
 	  infowindow.open(map, marker);
 	});
-// 	var infoContent = 
-// 		"<div>"+
-// 			"<h1>"+doctorLocs[i].practice+"</h1>"+
-// 			"<h2>"+doctorLocs[i].profile.last_name + ", " + doctorLocs[i].profile.first_name + "</h2>"+
-// 			"<img src='"+doctorLocs[i].profile.image_url+"' height=20px widith=20px />" +
+}
 
-// 		"</div>";
-// 	var infowindow = new google.maps.InfoWindow({
-// 	  content: infoContent
-// 	});
-// 	marker.addListener('click', function() {
-// 	  infowindow.open(map, marker);
-// 	});
-// }
+function popSpecs() {
+	var allSpec = [];
+	var specRequest = {
+		data: {
+			user_key: "02d43d2040b26fd640f5963e44054d2f"
+		},
+		type: 'GET',
+		url: 'https://api.betterdoctor.com/2015-01-27/specialties'
+	}
+	$.jax(specRequest).done(function (res) {
+		for(var i =0; i<res.data.length; i++){
+			allSpec.append({
+				name: res.data[i].name,
+				id: res.data[i].uid
+			});	
+			AddDoctor(res.data[i].uid,res.data[i].name);		
+		}
+	});
+
+}
+function popProviders () {
+	var allPro = [];
+	var specRequest = {
+		data: {
+			user_key: "02d43d2040b26fd640f5963e44054d2f"
+		},
+		type: 'GET',
+		url: 'https://api.betterdoctor.com/2015-01-27/insurances'
+	}
+	$.jax(specRequest).done(function (res) {
+		for(var i =0; i<res.data.length; i++){
+			allPro.append({
+				name: res.data[i].name,
+				plans: res.data[i].plans
+			});			
+			AddInsurer({
+				name: res.data[i].name,
+				plans: res.data[i].plans
+			});
+		}
+	});
+
 }

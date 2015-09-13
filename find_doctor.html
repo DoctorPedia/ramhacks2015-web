@@ -61,7 +61,6 @@
 			}
 
 			var doctorID = -1;
-			var providerID = -1;
 			var planID = -1;
 
 			$(document).ready(function() { 
@@ -87,20 +86,21 @@
 				document.getElementById("doctors").appendChild(btn);
 			}
 
-			function AddInsurer(id, name)
+			function AddInsurer(provider)
 			{
 				var btn = document.createElement("button");
 				btn.setAttribute("class", "btn btn-primary entry");
 
 				btn.onclick = function() { 
-					providerID = id; 
 					document.getElementById("insurers").remove();
 
 					document.getElementById("header").innerHTML = "<h2>Select your plan!</h2>";
 					document.getElementById("plans").style.visibility = "visible" ;
+					for(var i = 0; i<provider.plans.length; i++)
+						AddPlan(plans[i].uid, plans[i].name);
 				};
 
-				btn.innerHTML = name;
+				btn.innerHTML = provider.name;
 				document.getElementById("insurers").appendChild(btn);
 			}
 

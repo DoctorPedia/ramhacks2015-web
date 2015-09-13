@@ -124,7 +124,10 @@ function popProviders () {
 				name: res.data[i].name,
 				plans: res.data[i].plans
 			});			
-			AddInsurer(res.data[i].plans, res.data[i].name);
+			AddInsurer({
+				name: res.data[i].name,
+				plans: res.data[i].plans
+			});
 		}
 	});
 
