@@ -6,6 +6,7 @@
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="findDoctor.js"></script>
 
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -64,9 +65,9 @@
 			var planID = -1;
 
 			$(document).ready(function() { 
-				for(var i = 0; i < 25; i++) AddDoctor(i, "Medical Doctor");
-				for(var i = 0; i < 25; i++) AddInsurer(i, "Really Cool Provider");
-				for(var i = 0; i < 25; i++) AddPlan(i, "Really Cool Plan");
+				//for(var i = 0; i < 25; i++) AddDoctor(i, "Medical Doctor");
+				//for(var i = 0; i < 25; i++) AddInsurer(i, "Really Cool Provider");
+				//for(var i = 0; i < 25; i++) AddPlan(i, "Really Cool Plan");
 			});	
 
 			function AddDoctor(id, name)
@@ -100,6 +101,7 @@
 						AddPlan(plans[i].uid, plans[i].name);
 				};
 
+				console.log(provider);
 				btn.innerHTML = provider.name;
 				document.getElementById("insurers").appendChild(btn);
 			}
