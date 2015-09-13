@@ -45,16 +45,18 @@ function parseDoctors(doctors) {
 	for(var i =0; i<doctors.length;i++){
 		var practices = doctors[i].practices;
 		for(var j = 0; j<practices.length; j++){
-			doctorLocs.push({
+			var tempObj = {
 				loc: {
 					lat: practices[j].lat,
 					lng: practices[j].lon
 				},
 				specs: doctors[i].specialties,
 				practice: doctors[i].practices[0].name,
-				rating: doctors[i].ratings[0].rating,
 				profile: doctors[i].profile //first_name, middle_name, last_name, title, image_url, gender, bio
-			});			
+			};
+			if(doctors[i].ratings.length > 0)
+				tempObj['rating'] = doctors[i].ratings[0].rating;
+			doctorLocs.push(tempObj);			
 		}
 	}
 }
@@ -88,9 +90,10 @@ function attachInfo(marker, doctor){
 		"<div>"+ "<h1>"+doctor.practice+"</h1><hr>"+ '<div class="pull-left" style="width: 50%; max-width: 46px; float:left">'
 			+ "<img src='"+doctor.profile.image_url+"' height=45px widith=45px /></div>" +
 			"<h2>"+doctor.profile.last_name + ", " + doctor.profile.first_name + "</h2>"+
-			"<h3>"+specString+"</h3>"+
-			'<span class="stars">' + doctor.rating +'</span>'+
-		"</div>";
+			"<h3>"+specString+"</h3>";
+		if(doctor.rating)
+			infoContent += '<span class="stars">' + doctor.rating +'</span>';
+		infoContent += "</div>";
 	var infowindow = new google.maps.InfoWindow({
 	  content: infoContent
 	});
