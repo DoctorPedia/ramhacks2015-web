@@ -7,6 +7,7 @@ var loc = {lat: 0, lng: 0};
 // }
 var doctorLocs = [];
 function findDoctors(range, limit, insureID, specID) {
+	specID = "";
 	navigator.geolocation.getCurrentPosition(function(location){
 		loc['lat'] = location.coords.latitude;
     	loc['lng'] =location.coords.longitude;
@@ -98,23 +99,24 @@ function attachInfo(marker, doctor){
 }
 
 function popSpecs() {
-	var allSpec = [];
-	var specRequest = {
-		data: {
-			user_key: "02d43d2040b26fd640f5963e44054d2f"
-		},
-		type: 'GET',
-		url: 'https://api.betterdoctor.com/2015-01-27/specialties'
-	}
-	$.ajax(specRequest).done(function (res) {
-		for(var i =0; i<res.data.length; i++){
-			//allSpec.append({
-			//	name: res.data[i].name,
-			//	id: res.data[i].uid
-			//});	
-			AddDoctor(res.data[i].uid,res.data[i].name);		
-		}
-	});
+	// var allSpec = [];
+	// var specRequest = {
+	// 	data: {
+	// 		user_key: "02d43d2040b26fd640f5963e44054d2f"
+	// 	},
+	// 	type: 'GET',
+	// 	url: 'https://api.betterdoctor.com/2015-01-27/specialties'
+	// }
+	// $.ajax(specRequest).done(function (res) {
+	// 	for(var i =0; i<res.data.length; i++){
+	// 		//allSpec.append({
+	// 		//	name: res.data[i].name,
+	// 		//	id: res.data[i].uid
+	// 		//});	
+	// 		AddDoctor(res.data[i].uid,res.data[i].name);		
+	// 	}
+	// });
+	
 
 }
 function popProviders () {
