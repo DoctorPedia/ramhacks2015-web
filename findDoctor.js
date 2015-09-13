@@ -56,6 +56,8 @@ function parseDoctors(doctors) {
 			};
 			if(doctors[i].ratings.length > 0)
 				tempObj['rating'] = doctors[i].ratings[0].rating;
+			else//add fake ratings
+				tempObj['rating'] = (Math.floor((Math.random() * 10) + 1)) % 5;
 			doctorLocs.push(tempObj);			
 		}
 	}
