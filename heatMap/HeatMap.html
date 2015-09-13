@@ -1,8 +1,10 @@
 ﻿<!DOCTYPE html>
 <html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <head>
     <meta charset="utf-8">
     <title>Heatmaps</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <style>
         html, body {
             height: 100%;
@@ -14,15 +16,63 @@
             height: 100%;
         }
 
+        #floating-panel {
+            position: absolute;
+            top: 10px;
+            left: 5%;
+            z-index: 5;
+            background-color: #fff;
+            padding: 5px;
+            border: 1px solid #999;
+            text-align: center;
+            font-family: 'Roboto','sans-serif';
+            line-height: 30px;
+            padding-left: 10px;
+        }
+
+        #floating-panel {
+            background-color: #fff;
+            border: 1px solid #999;
+            left: 2%;
+            padding: 5px;
+            position: absolute;
+            top: 10px;
+            z-index: 5;
+        }
+        .toggleOnButton {
+            border: solid black 1px;
+            border-radius: 2px;
+            height: 40px;
+            width: 60px;
+            font-size: 14px;
+        }
+
+        .toggleOffButton {
+            border: solid black 1px;
+            border-radius: 2px;
+            height: 40px;
+            width: 60px;
+            font-size: 14px;
+            background-color: #70B54A;
+        }
     </style>
 </head>
 
 <body>
-    <div id="diseaseButtons">
-        <button onlick="getPointsCold()">Cold</button>
-        <button onlick="getPointsStrep()">Strep</button>
-        <button onlick="getPointsFlu()">Flu</button>
+    <div id="floating-panel">
+        <button onclick="getPointsCold()" class="toggleOnButton" id="onCold">Cold</button>
+        <button onclick="toggleCold()" class="toggleOffButton" id="offCold">Cold</button>
+        <button onclick="getPointsStrep()" class="toggleOnButton" id="onStrep">Strep</button>
+        <button onclick="toggleStrep()" class="toggleOffButton" id="offStrep">Strep</button>
+        <button onclick="getPointsFlu()" class="toggleOnButton" id="onFlu">Flu</button>
+        <button onclick="toggleFlu()" class="toggleOffButton" id="offFlu">Flu</button>
+
     </div>
+
+    <script>
+        $(".toggleOffButton").hide();
+    </script>
+
     <div id="map"></div>
     <script>
 
@@ -39,8 +89,22 @@
 
         }
 
-        function toggleHeatmap() {
-            heatmap.setMap(heatmap.getMap() ? null : map);
+        function toggleCold() {
+            $("#onCold").show();
+            $("#offCold").hide();
+            heatmapCold.setMap(heatmapCold.getMap() ? null : map);
+        }
+
+        function toggleStrep() {
+            $("#onStrep").show();
+            $("#offStrep").hide();
+            heatmapStrep.setMap(heatmapStrep.getMap() ? null : map);
+        }
+
+        function toggleFlu() {
+            $("#onFlu").show();
+            $("#offFlu").hide();
+            heatmapFlu.setMap(heatmapFlu.getMap() ? null : map);
         }
 
         function changeGradient() {
@@ -73,96 +137,88 @@
 
         // Heatmap data: 500 Points
         function getPointsStrep() {
-            var strepPoints= [
-              new google.maps.LatLng(37.5333, -77.4667),
-              new google.maps.LatLng(37.5336, -77.4667),
-              new google.maps.LatLng(37.5348, -77.4667),
-              new google.maps.LatLng(37.5369, -77.4667),
-              new google.maps.LatLng(37.5345, -77.4667),
-              new google.maps.LatLng(37.5343, -77.4667),
-              new google.maps.LatLng(37.5326, -77.4667),
-              new google.maps.LatLng(37.5383, -77.4667),
-              new google.maps.LatLng(37.5393, -77.4667),
 
-              new google.maps.LatLng(37.6333, -77.4667),
-              new google.maps.LatLng(37.6336, -77.4667),
-              new google.maps.LatLng(37.6348, -77.4667),
-              new google.maps.LatLng(37.6369, -77.4667),
-              new google.maps.LatLng(37.6345, -77.4667),
-              new google.maps.LatLng(37.6343, -77.4667),
-              new google.maps.LatLng(37.6326, -77.4667),
-              new google.maps.LatLng(37.6383, -77.4667),
-              new google.maps.LatLng(37.6393, -77.4667),
+            $("#onStrep").hide();
+            $("#offStrep").show();
+
+            var strepPoints = [
+              new google.maps.LatLng(37.545679, -77.451128),
+              new google.maps.LatLng(37.545662, -77.451240),
+              new google.maps.LatLng(37.545611, -77.451036),
+              new google.maps.LatLng(37.545645, -77.450956),
+              new google.maps.LatLng(37.545534, -77.450800),
+              new google.maps.LatLng(37.545700, -77.450634),
+              new google.maps.LatLng(37.544773, -77.448132),
+              new google.maps.LatLng(37.547729, -77.453608),
+              new google.maps.LatLng(37.552774, -77.469764),
+              new google.maps.LatLng(37.551546, -77.468579),
+
+              new google.maps.LatLng(37.541989, -77.429525),
+              new google.maps.LatLng(37.542573, -77.429916),
+              new google.maps.LatLng(37.541369, -77.428968),
+              new google.maps.LatLng(37.541437, -77.431242),
+              new google.maps.LatLng(37.542946, -77.428909)
             ];
 
             heatmapStrep = new google.maps.visualization.HeatmapLayer({
-                data: points,
+                data: strepPoints,
                 map: map
             });
         }
 
         function getPointsFlu() {
-            var fluPoints= [
-              new google.maps.LatLng(37.5333, -77.43667),
-              new google.maps.LatLng(37.5336, -77.4367),
-              new google.maps.LatLng(37.5348, -77.4367),
-              new google.maps.LatLng(37.5369, -77.4667),
-              new google.maps.LatLng(37.5345, -77.4367),
-              new google.maps.LatLng(37.5343, -77.4367),
-              new google.maps.LatLng(37.5326, -77.4367),
-              new google.maps.LatLng(37.5383, -77.4367),
-              new google.maps.LatLng(37.5393, -77.4367),
 
-              new google.maps.LatLng(37.67333, -77.4667),
-              new google.maps.LatLng(37.7336, -77.4667),
-              new google.maps.LatLng(37.7348, -77.4667),
-              new google.maps.LatLng(37.7369, -77.4667),
-              new google.maps.LatLng(37.7345, -77.4667),
-              new google.maps.LatLng(37.7343, -77.4667),
-              new google.maps.LatLng(37.7326, -77.4667),
-              new google.maps.LatLng(37.7383, -77.4667),
-              new google.maps.LatLng(37.7393, -77.4667),
+            $("#onFlu").hide();
+            $("#offFlu").show();
+
+            var fluPoints = [
+              new google.maps.LatLng(37.539981, -77.429837),
+              new google.maps.LatLng(37.539803, -77.429625),
+              new google.maps.LatLng(37.540344, -77.429983),
+              new google.maps.LatLng(37.539739, -77.429465),
+
+              new google.maps.LatLng(37.545600, -77.450808),
+              new google.maps.LatLng(37.549732, -77.450734),
+
             ];
             heatmapFlu = new google.maps.visualization.HeatmapLayer({
-                data: points,
+                data: fluPoints,
                 map: map
             });
         }
 
         function getPointsCold() {
-            var coldPoints= [
-              new google.maps.LatLng(37.5333, -77.8667),
-              new google.maps.LatLng(37.5336, -77.8667),
-              new google.maps.LatLng(37.5348, -77.8667),
-              new google.maps.LatLng(37.5369, -77.8667),
-              new google.maps.LatLng(37.5345, -77.8667),
-              new google.maps.LatLng(37.5343, -77.8667),
-              new google.maps.LatLng(37.5326, -77.8667),
-              new google.maps.LatLng(37.5383, -77.8667),
-              new google.maps.LatLng(37.5393, -77.8667),
 
-              new google.maps.LatLng(37.6423, -77.4667),
-              new google.maps.LatLng(37.6435, -77.4667),
-              new google.maps.LatLng(37.6448, -77.4667),
-              new google.maps.LatLng(37.6469, -77.4667),
-              new google.maps.LatLng(37.6445, -77.4667),
-              new google.maps.LatLng(37.6433, -77.4667),
-              new google.maps.LatLng(37.64326, -77.4667),
-              new google.maps.LatLng(37.6483, -77.4667),
-              new google.maps.LatLng(37.6493, -77.4667),
+            $("#onCold").hide();
+            $("#offCold").show();
 
+            var coldPoints = [
+              new google.maps.LatLng(37.549586, -77.450520),
+              new google.maps.LatLng(37.548457, -77.453481),
+              new google.maps.LatLng(37.548602, -77.453159),
+              new google.maps.LatLng(37.548505, -77.453563),
+              new google.maps.LatLng(37.547944, -77.452230),
+              new google.maps.LatLng(37.546244, -77.453476),
+              new google.maps.LatLng(37.545446, -77.450481),
+              new google.maps.LatLng(37.545153, -77.449552),
+
+              new google.maps.LatLng(37.540739, -77.430889),
+              new google.maps.LatLng(37.541249, -77.428934),
+              new google.maps.LatLng(37.544810, -77.455183),
+              new google.maps.LatLng(37.548480, -77.458241),
+              new google.maps.LatLng(37.549901, -77.455811)
             ];
 
-            heatmapStrep = new google.maps.visualization.HeatmapLayer({
-                data: points,
+            heatmapCold = new google.maps.visualization.HeatmapLayer({
+                data: coldPoints,
                 map: map
             });
         }
 
     </script>
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0Qofoi1iDmxBLbUfr_4ETdevbCIJJuKM&signed_in=true&libraries=visualization&callback=initMap" >
-            
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0Qofoi1iDmxBLbUfr_4ETdevbCIJJuKM&signed_in=true&libraries=visualization&callback=initMap">
+
     </script>
 </body>
 </html>
