@@ -88,8 +88,8 @@
 				var $people = $('#doctors'),
 				$peopleli = $people.children();
 				$peopleli.sort(function(a,b){
-					var an = a.text(),
-						bn = b.text();
+					var an = a.innerHTML,
+						bn = b.innerHTML;
 
 					if(an > bn) {
 						return 1;
