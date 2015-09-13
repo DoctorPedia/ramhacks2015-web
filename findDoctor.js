@@ -119,7 +119,6 @@ function popProviders () {
 		url: 'https://api.betterdoctor.com/2015-01-27/insurances'
 	}
 	$.ajax(specRequest).done(function (res) {
-		res.data.sort(sortPro);
 		for(var i =0; i<res.data.length; i++){
 			//allPro.append({
 			//	name: res.data[i].name,
@@ -132,14 +131,6 @@ function popProviders () {
 		}
 	});
 
-}
-function sortPro(a,b){
-	if(a.name == b.name)
-		return 0;
-	if(a > b)
-		return 1;
-	else
-		return -1
 }
 popProviders();
 popSpecs();
