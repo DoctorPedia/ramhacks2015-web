@@ -100,10 +100,10 @@ function popSpecs() {
 	}
 	$.ajax(specRequest).done(function (res) {
 		for(var i =0; i<res.data.length; i++){
-			allSpec.append({
-				name: res.data[i].name,
-				id: res.data[i].uid
-			});	
+			//allSpec.append({
+			//	name: res.data[i].name,
+			//	id: res.data[i].uid
+			//});	
 			AddDoctor(res.data[i].uid,res.data[i].name);		
 		}
 	});
@@ -120,10 +120,10 @@ function popProviders () {
 	}
 	$.ajax(specRequest).done(function (res) {
 		for(var i =0; i<res.data.length; i++){
-			allPro.append({
-				name: res.data[i].name,
-				plans: res.data[i].plans
-			});			
+			//allPro.append({
+			//	name: res.data[i].name,
+			//	plans: res.data[i].plans
+			//});			
 			AddInsurer({
 				name: res.data[i].name,
 				plans: res.data[i].plans
