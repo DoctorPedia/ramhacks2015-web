@@ -140,7 +140,3 @@ function popProviders () {
 	});
 
 }
-if(typeof AddInsurer == "function"){
-	popProviders();
-	popSpecs();
-}
