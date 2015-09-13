@@ -58,7 +58,7 @@ function populateMap () {
 
 			"</div>";
 			var infowindow = new google.maps.InfoWindow({
-			  content: contentString
+			  content: infoContent
 			});
 			marker.addListener('click', function() {
 			  infowindow.open(map, marker);
