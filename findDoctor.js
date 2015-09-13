@@ -52,7 +52,7 @@ function parseDoctors(doctors) {
 				},
 				specs: doctors[i].specialties,
 				practice: doctors[i].practices[0].name,
-				rating: doctors[i].ratings[0].rating,
+				//rating: doctors[i].ratings[0].rating,
 				profile: doctors[i].profile //first_name, middle_name, last_name, title, image_url, gender, bio
 			});			
 		}
