@@ -1,5 +1,5 @@
 var map;
-var loc = {lat: 0, lng: 0};
+var loc = {lat: 37.5333, lng: -77.4667};
 // navigator.geolocation.getCurrentPosition(GetLocation);
 // function GetLocation(location) {
 //     loc['lat'] = location.coords.latitude;
