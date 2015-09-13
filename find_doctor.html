@@ -45,11 +45,25 @@
 
 		<script>
 
+			Element.prototype.remove = function() {
+			this.parentElement.removeChild(this);
+			}
+			NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+			for(var i = this.length - 1; i >= 0; i--) {
+			if(this[i] && this[i].parentElement) {
+			this[i].parentElement.removeChild(this[i]);
+			}
+			}
+			}
+
 			var doctorID = -1;
 			var providerID = -1;
+			var planID = -1;
 
 			$(document).ready(function() { 
 				for(var i = 0; i < 25; i++) AddDoctor(i, "Medical Doctor");
+				for(var i = 0; i < 25; i++) AddInsurer(i, "Really Cool Provider");
+				for(var i = 0; i < 25; i++) AddPlan(i, "Really Cool Plan");
 			});	
 
 			function AddDoctor(id, name)
@@ -59,13 +73,12 @@
 
 				btn.onclick = function() { 
 					doctorID = id;
-					document.getElementById("entries").innerHTML = "";
-
-					for(var i = 0; i < 25; i++) AddInsurer(i, "Really Cool Provider");
+					document.getElementById("doctors").remove();
+					document.getElementById("insurers").style.visibility = "visible" ;
 				};
 
 				btn.innerHTML = name;
-				document.getElementById("entries").appendChild(btn);
+				document.getElementById("doctors").appendChild(btn);
 			}
 
 			function AddInsurer(id, name)
@@ -75,17 +88,33 @@
 
 				btn.onclick = function() { 
 					providerID = id; 
-					document.getElementById("entries").style.visibility = "hidden";
+					document.getElementById("insurers").remove();
+					document.getElementById("plans").style.visibility = "visible" ;
+				};
+
+				btn.innerHTML = name;
+				document.getElementById("insurers").appendChild(btn);
+			}
+
+			function AddPlan(id, name)
+			{
+				var btn = document.createElement("button");
+				btn.setAttribute("class", "btn btn-primary entry");
+
+				btn.onclick = function() { 
+					planID = id; 
+					document.getElementById("plans").remove();
+
 					HandleSelectionCompletion();
 				};
 
 				btn.innerHTML = name;
-				document.getElementById("entries").appendChild(btn);
+				document.getElementById("plans").appendChild(btn);
 			}
 
 			function HandleSelectionCompletion()
 			{
-				alert("DoctorID: " + doctorID + ", ProviderID: " + providerID);
+				alert("DoctorID: " + doctorID + ", ProviderID: " + providerID + ", PlanID: " + planID);
 			}
 
 		</script>
@@ -94,7 +123,15 @@
  
 	<body>
 
-		<div id="entries" class="entry_container">
+		<div id="doctors" class="entry_container">
+
+		</div>
+
+		<div id="insurers" class="entry_container" style="visibility: hidden">
+
+		</div>
+
+		<div id="plans" class="entry_container" style="visibility: hidden">
 
 		</div>
 
