@@ -9,7 +9,7 @@ function findDoctors(range, limit, insureID, specID) {
 
 	var baseURL = 'https://api.betterdoctor.com/2015-01-27/doctors';
 	var request = {
-		url: baseURL,
+		url: 'https://api.betterdoctor.com/2015-01-27/doctors',
 		data: {
 			location: loc.lat + "," + loc.lng + "," + range,
 			user_location: loc.lat + "," + loc.lng,
