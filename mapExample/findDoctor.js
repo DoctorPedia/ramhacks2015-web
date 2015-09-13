@@ -87,18 +87,45 @@ function attachInfo(marker, doctor){
 	marker.addListener('click', function() {
 	  infowindow.open(map, marker);
 	});
-// 	var infoContent = 
-// 		"<div>"+
-// 			"<h1>"+doctorLocs[i].practice+"</h1>"+
-// 			"<h2>"+doctorLocs[i].profile.last_name + ", " + doctorLocs[i].profile.first_name + "</h2>"+
-// 			"<img src='"+doctorLocs[i].profile.image_url+"' height=20px widith=20px />" +
+}
 
-// 		"</div>";
-// 	var infowindow = new google.maps.InfoWindow({
-// 	  content: infoContent
-// 	});
-// 	marker.addListener('click', function() {
-// 	  infowindow.open(map, marker);
-// 	});
-// }
+function popSpecs() {
+	var allSpec = [];
+	var specRequest = {
+		data: {
+			user_key: "02d43d2040b26fd640f5963e44054d2f"
+		},
+		type: 'GET',
+		url: 'https://api.betterdoctor.com/2015-01-27/specialties'
+	}
+	$.jax(specRequest).done(function (res) {
+		for(var i =0; i<res.data.length; i++){
+			allSpec.append({
+				name: res.data[i].name,
+				id: res.data[i].uid
+			});	
+			AddDoctor(res.data[i].uid,res.data[i].name);		
+		}
+	});
+
+}
+function popProviders () {
+	var allPro = [];
+	var specRequest = {
+		data: {
+			user_key: "02d43d2040b26fd640f5963e44054d2f"
+		},
+		type: 'GET',
+		url: 'https://api.betterdoctor.com/2015-01-27/insurances'
+	}
+	$.jax(specRequest).done(function (res) {
+		for(var i =0; i<res.data.length; i++){
+			allPro.append({
+				name: res.data[i].name,
+				plans: res.data[i].plans
+			});			
+			AddInsurer(res.data[i].plans, res.data[i].name);
+		}
+	});
+
 }
