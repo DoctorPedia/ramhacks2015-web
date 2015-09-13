@@ -1,10 +1,5 @@
 var map;
 var loc = {lat: 37.5466, lng: -77.4533};
-navigator.geolocation.getCurrentPosition(GetLocation);
-function GetLocation(location) {
-    loc['lat'] = location.coords.latitude;
-    loc['lng'] =location.coords.longitude;
-}
 var doctorLocs = [];
 function findDoctors(range, limit, insureID, specID) {
 	if(!(limit.length > 0))
